@@ -1,0 +1,10 @@
+{
+{% if statsd_debug == 'true' %}
+    debug: {{ statsd_debug }}
+{% else %}
+    graphitePort: {{ graphite_port }}
+    ,graphiteHost: {{ graphite_host }}
+{% endif %}
+    ,port: {{ statsd_port }}
+    ,backends: [ './backends/graphite' ]
+}
