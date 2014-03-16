@@ -16,10 +16,13 @@ Role Variables
 --------------
 
 `statsd_debug: 'false'`
+
 `statsd_version: v0.7.1`
+
 `statsd_port: 8125`
 
 `graphite_port: 2003`
+
 `graphite_host: localhost`
 
 
