@@ -1,10 +1,25 @@
 {
+    port: {{ statsd_port }}
+    ,backends: [
+        {% if graphite_host -%}
+          './backends/graphite',
+        {% endif -%}
+        {% if librato_email is defined -%}
+         'statsd-librato-backend',
+        {% endif -%}
+    ]
 {% if statsd_debug == 'true' %}
-    debug: {{ statsd_debug }}
-{% else %}
-    graphitePort: {{ graphite_port }}
-    ,graphiteHost: {{ graphite_host }}
+    ,debug: {{ statsd_debug }}
 {% endif %}
-    ,port: {{ statsd_port }}
-    ,backends: [ './backends/graphite' ]
+{% if graphite_host %}
+    ,graphiteHost: "{{ graphite_host }}"
+    ,graphitePort: {{ graphite_port }}
+{% endif %}
+{% if librato_email is defined %}
+    ,librato: {
+        email:  "{{ librato_email }}",
+        token:  "{{ librato_token }}",
+        source: "{{ librato_source|default(ansible_hostname) }}"
+    }
+{% endif %}
 }

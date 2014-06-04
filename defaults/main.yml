@@ -6,3 +6,5 @@ statsd_port: 8125
 
 graphite_port: 2003
 graphite_host: localhost
+
+apt_default_release: "*backports"

@@ -25,6 +25,12 @@ Role Variables
 
 `graphite_host: localhost`
 
+`librato_email: user@example.com`
+
+`librato_token: <...>`
+
+`librato_source: hostname` (default: ansible_hostname)
+
 
 Dependencies
 ------------
@@ -40,7 +46,7 @@ Assumes the Graphite is running on the same host as statsd
 ---
     - hosts: statsd
       roles:
-         - { role: dmichel1.ansible-statsd }
+         - { role: dmichel1.statsd }
 ```
 
 
@@ -55,12 +61,29 @@ Overide the Graphite host
   vars:
     ssh_user: root
   roles:
-    - { role: ansible-statsd,
+    - { role: dmichel1.statsd,
       graphite_host: 192.168.1.1 }
 
 ```
 
+Librato backend (graphite disabled)
+```yaml
+---
 
+- name: Stats role
+  hosts: statsd
+  user: '{{ ssh_user }}'
+  sudo: no
+  vars:
+    ssh_user: root
+  roles:
+    - { role: dmichel1.statsd,
+        graphite_host: '',
+        librato_email: 'user@example.com',
+        librato_token: '00112233445566778899AABBCCDDEEFF',
+        librato_source: 'backends cluster',   # optional
+    }
+```
 
 
 License
