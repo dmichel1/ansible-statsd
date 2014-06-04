@@ -8,7 +8,7 @@
   when: ansible_pkg_mgr == 'yum'
 
 - name: Install nodejs for debian
-  apt: "name={{ item }} update_cache=yes"
+  apt: "name={{ item }} update_cache=yes default_release={{ apt_default_release }}"
   with_items:
     - nodejs
     - git
