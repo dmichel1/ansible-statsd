@@ -9,7 +9,7 @@ Simple daemon for easy stats aggregation
 Requirements
 ------------
 
-Nodejs is installed from debian backports
+
 
 
 Role Variables
