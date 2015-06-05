@@ -1,14 +1,13 @@
 ---
 
-- name: Install nodejs for redhat
+- name: Install Statsd Dependencies for Redhat
   yum: "name={{ item }} state=present"
   with_items:
     - nodejs
     - git
-
   when: ansible_pkg_mgr == 'yum'
 
-- name: Install nodejs for debian
+- name: Install Statsd Dependencies for Debian
   apt: "name={{ item }} update_cache=yes"
   with_items:
     - nodejs
