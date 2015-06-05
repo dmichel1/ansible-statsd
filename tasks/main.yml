@@ -5,10 +5,11 @@
   with_items:
     - nodejs
     - git
+
   when: ansible_pkg_mgr == 'yum'
 
 - name: Install nodejs for debian
-  apt: "name={{ item }} update_cache=yes default_release={{ apt_default_release }}"
+  apt: "name={{ item }} update_cache=yes"
   with_items:
     - nodejs
     - git
@@ -51,5 +52,5 @@
   sudo_user: node
   when: librato_email is defined
 
-- name: Start statsd 
+- name: Start statsd
   service: name=statsd state=running enabled=yes
