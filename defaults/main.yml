@@ -6,3 +6,4 @@ statsd_port: 8125
 
 graphite_port: 2003
 graphite_host: localhost
+delete_idle_stats: 'false'

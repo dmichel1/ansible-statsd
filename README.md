@@ -25,6 +25,8 @@ Role Variables
 
 `graphite_host: localhost`
 
+`delete_idle_stats: 'false'`
+
 `librato_email: user@example.com`
 
 `librato_token: <...>`

@@ -15,6 +15,9 @@
     ,graphiteHost: "{{ graphite_host }}"
     ,graphitePort: {{ graphite_port }}
 {% endif %}
+{% if delete_idle_stats == 'true' %}
+    ,deleteIdleStats: true
+{% endif %}
 {% if librato_email is defined %}
     ,librato: {
         email:  "{{ librato_email }}",
