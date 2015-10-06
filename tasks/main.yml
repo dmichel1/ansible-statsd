@@ -37,13 +37,18 @@
 - name: Create statsd init.d script
   template: src="etc/init/statsd.{{ ansible_os_family }}.j2" dest=/etc/init.d/statsd owner=root group=root mode=0755
 
+- name: Check if npm is installed
+  command: 'npm --version > /dev/null 2>&1'
+  register: npm_check
+  ignore_errors: True
+
 - name: Install npm
   yum: name=npm
-  when: librato_email is defined and ansible_pkg_mgr == 'yum'
+  when: librato_email is defined and ansible_pkg_mgr == 'yum' and npm_check|failed
 
 - name: Install npm
   apt: name=npm
-  when: librato_email is defined and ansible_pkg_mgr == 'apt'
+  when: librato_email is defined and ansible_pkg_mgr == 'apt' and npm_check|failed
 
 - name: Install librato plugin
   command: npm install statsd-librato-backend chdir=/opt/statsd
